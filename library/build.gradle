@@ -1,7 +1,39 @@
+buildscript {
+   repositories {
+      mavenLocal()
+   }
+   dependencies {
+        classpath 'com.jaredsburrows:gradle-checker-framework-plugin:0.2.3-SNAPSHOT'
+   }
+}
+
+
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.jaredsburrows.checkerframework'
+
+repositories {
+ mavenLocal()
+
+        google()
+        jcenter()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+mavenCentral()
+}
+
+    checkerFramework {
+      checkers = [
+             'com.amazon.checkerframework.compliance.kms.ComplianceChecker',
+             'com.amazon.checkerframework.cryptopolicy.CryptoPolicyComplianceChecker'
+      ]
+      extraJavacArgs = ['-Xmaxerrs', '1000', '-AsuppressWarnings=cast.unsafe,type.invalid.conflicting.annos', "-Astubs=$rootProject.projectDir/stubs"]
+    }
+
+
 if (!hasProperty('DISABLE_ERROR_PRONE')) {
-    apply plugin: "net.ltgt.errorprone"
+//    apply plugin: "net.ltgt.errorprone"
 }
 
 tasks.withType(JavaCompile) {
@@ -9,6 +41,14 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    checkerFramework 'com.amazonaws:kms-compliance-checker:1.0'
+    implementation 'com.amazonaws:kms-compliance-checker:1.0'     
+    checkerFramework 'com.amazonaws:aws-crypto-compliance-checker:1.0'
+    implementation 'com.amazonaws:aws-crypto-compliance-checker:1.0'  
+    checkerFramework 'org.checkerframework:checker:2.7.0'
+    checkerFramework 'org.checkerframework:checker-qual:2.7.0'
+       checkerFramework('org.checkerframework:javacutil:2.7.0') { force=true }
+
     api project(':third_party:gif_decoder')
     api project(':third_party:disklrucache')
     api project(':annotation')
@@ -42,8 +82,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

@@ -48,7 +48,7 @@ import java.util.concurrent.Executor;
  * {@link com.bumptech.glide.request.target.Target}.
  */
 // Public API.
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings({"unused", "WeakerAccess", "value", "compliance", "crypto"}) // FALSE POSITIVE: CF 2.7.0 issues type.argument.type.incompatible
 public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBuilder<TranscodeType>>
     implements Cloneable,
     ModelTypes<RequestBuilder<TranscodeType>> {

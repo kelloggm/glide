@@ -39,6 +39,8 @@ subprojects { project ->
         maven {
             url "https://oss.sonatype.org/content/repositories/snapshots"
         }
+        mavenLocal()
+        mavenCentral()
     }
 
     tasks.withType(JavaCompile) {

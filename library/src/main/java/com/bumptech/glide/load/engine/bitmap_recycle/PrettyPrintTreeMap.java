@@ -1,6 +1,7 @@
 package com.bumptech.glide.load.engine.bitmap_recycle;
 
 import java.util.TreeMap;
+import java.util.Map.Entry;
 
 // Never serialized.
 @SuppressWarnings("serial")
