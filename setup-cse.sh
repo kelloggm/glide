@@ -16,5 +16,5 @@ export ANDROID_HOME=`pwd`/android-sdk/
 
 yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
 
-./gradlew clean compileDebugJavaWithJavac -Dorg.gradle.daemon=false
+./gradlew compileDebugJavaWithJavac
 
